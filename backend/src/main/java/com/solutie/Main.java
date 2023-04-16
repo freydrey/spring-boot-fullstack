@@ -1,6 +1,5 @@
 package com.solutie;
 
-
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import com.solutie.customer.Customer;
