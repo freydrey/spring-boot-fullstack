@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs on: ubuntu-latest
+    runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres:15.2
@@ -34,5 +34,5 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
-      - name: Build and run Unit/Integration Tests with Maven
+      - name: Build and run Unit/Integration Test/s with Maven
         run: mvn -ntp -B verify
