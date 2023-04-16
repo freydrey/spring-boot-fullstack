@@ -34,7 +34,6 @@ public class Main {
                     random.nextInt(19,99)
             );
             customerRepository.save(customer);
-
         };
 
     }
