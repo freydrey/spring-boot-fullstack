@@ -12,10 +12,6 @@
 	<groupId>com.solutie</groupId>
 	<artifactId>solutie-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<organization>
-		<name>solutie</name>
-		<url>https://solutie.net</url>
-	</organization>
 
 	<name>spring-boot-example</name>
 	<description>Demo project for Spring Boot</description>
@@ -23,6 +19,8 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<docker.username>fredodhis</docker.username>
+		<docker.image.name>solutie-api</docker.image.name>
+		<docker.image.tag/>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -172,7 +170,7 @@
 						</platforms>
 					</from>
 					<to>
-						<image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
+						<image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
 					    <tags>
 							<tag>latest</tag>
 						</tags>
