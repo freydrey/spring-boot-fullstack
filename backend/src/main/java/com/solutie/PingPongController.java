@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PingPongController {
-    record Pingpong(String result){}
+    record PingPong(String result){}
 
     @GetMapping("/ping")
     public PingPong getPingPong(){
-        return new Pingpong("Pong");
+        return new PingPong("Pong");
     }
 
 }
