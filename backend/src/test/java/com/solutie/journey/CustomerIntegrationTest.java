@@ -66,7 +66,7 @@ public class CustomerIntegrationTest {
 
         Customer expectedCustomer = new Customer(
                 name, email, age,
-                Gender.MALE);
+                gender);
 
         assertThat(allCustomers)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
