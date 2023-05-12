@@ -3,7 +3,6 @@ package com.solutie.customer;
 import com.solutie.customer.exception.DuplicateResourceException;
 import com.solutie.customer.exception.RequestValidationException;
 import com.solutie.customer.exception.ResourceNotFoundException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -47,8 +45,8 @@ class CustomerServiceTest {
                 id,
                 "foo",
                 "foo@gmail.com",
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         //When
@@ -82,7 +80,7 @@ class CustomerServiceTest {
         when(customerDAO.personWithEmailExists(email)).thenReturn(false);
 
         CustomerRegistrationRequest customerRegistrationRequest = new CustomerRegistrationRequest(
-                "alex",email,29
+                "alex",email,29, Gender.MALE
         );
 
         //When
@@ -99,6 +97,7 @@ class CustomerServiceTest {
         assertThat(capturedCustomer.getName()).isEqualTo(customerRegistrationRequest.name());
         assertThat(capturedCustomer.getEmail()).isEqualTo(customerRegistrationRequest.email());
         assertThat(capturedCustomer.getAge()).isEqualTo(customerRegistrationRequest.age());
+        assertThat(capturedCustomer.getGender()).isEqualTo(customerRegistrationRequest.gender());
 
     }
 
@@ -110,7 +109,7 @@ class CustomerServiceTest {
         when(customerDAO.personWithEmailExists(email)).thenReturn(true);
 
         CustomerRegistrationRequest customerRegistrationRequest = new CustomerRegistrationRequest(
-                "alex",email,29
+                "alex",email,29, Gender.MALE
         );
 
         //When
@@ -163,13 +162,13 @@ class CustomerServiceTest {
                 id,
                 "alex",
                 "alex@gmail.com",
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         String newEmail = "alexandro@gmail.com";
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                "alexandro",newEmail,29
+                "alexandro",newEmail,29, Gender.MALE
         );
 
         when(customerDAO.personWithEmailExists(newEmail)).thenReturn(false);
@@ -187,6 +186,7 @@ class CustomerServiceTest {
         assertThat(capturedCustomer.getAge()).isEqualTo(updateRequest.age());
         assertThat(capturedCustomer.getEmail()).isEqualTo(updateRequest.email());
         assertThat(capturedCustomer.getName()).isEqualTo(updateRequest.name());
+        assertThat(capturedCustomer.getGender()).isEqualTo(updateRequest.gender());
     }
 
     @Test
@@ -198,12 +198,12 @@ class CustomerServiceTest {
                 id,
                 "alex",
                 "alex@gmail.com",
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                "alexandro",null,null
+                "alexandro",null,null, null
         );
 
         //When
@@ -231,13 +231,13 @@ class CustomerServiceTest {
                 id,
                 "alex",
                 "alex@gmail.com",
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         String newEmail = "alexandro@gmail.com";
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                null,newEmail,null
+                null,newEmail,null,null
         );
 
         when(customerDAO.personWithEmailExists(newEmail)).thenReturn(false);
@@ -267,12 +267,12 @@ class CustomerServiceTest {
                 id,
                 "alex",
                 "alex@gmail.com",
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                null,null,22
+                null,null,22, null
         );
 
         //When
@@ -300,13 +300,13 @@ class CustomerServiceTest {
                 id,
                 "alex",
                 "alex@gmail.com",
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         String newEmail = "alexandro@gmail.com";
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                null,newEmail,null
+                null,newEmail,null, null
         );
 
         when(customerDAO.personWithEmailExists(newEmail)).thenReturn(true);
@@ -330,12 +330,12 @@ class CustomerServiceTest {
                 id,
                 "alex",
                 "alex@gmail.com",
-                23
-        );
+                23,
+                Gender.MALE);
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                customer.getName(),customer.getEmail(),customer.getAge()
+                customer.getName(),customer.getEmail(),customer.getAge(),customer.getGender()
         );
 
         //When

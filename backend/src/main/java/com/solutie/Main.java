@@ -5,11 +5,12 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import com.solutie.customer.Customer;
 import com.solutie.customer.CustomerRepository;
+import com.solutie.customer.Gender;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import java.util.List;
+
 import java.util.Random;
 
 @SpringBootApplication
@@ -28,10 +29,14 @@ public class Main {
             Name name = faker.name();
             String firstname = name.firstName();
             String lastname = name.lastName();
+            int age = random.nextInt(19, 99);
+            Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
             Customer customer = new Customer(
                     firstname + ' ' + lastname,
                     firstname + '.' + lastname + "@amigoscode.com",
-                    random.nextInt(19,99)
+                    age,
+                    gender
             );
             customerRepository.save(customer);
         };
