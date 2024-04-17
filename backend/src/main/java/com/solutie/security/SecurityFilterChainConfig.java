@@ -38,6 +38,11 @@ public class SecurityFilterChainConfig {
                         , "/api/v1/customers","/api/auth/login"
                 )
                 .permitAll()
+                .requestMatchers(
+                        HttpMethod.GET,
+                        "/ping"
+                )
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
